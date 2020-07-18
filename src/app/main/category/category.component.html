@@ -1,0 +1,27 @@
+<div class="animated fadeIn">
+    <app-loader [show]="loading"></app-loader>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title mb-0">Kategori</h4>
+            <div class="small text-muted">Daftar Kategori</div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <p-table #tableCategory [value]="listCategory" [rows]="10" [paginator]="true" >
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
