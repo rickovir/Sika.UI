@@ -15,17 +15,12 @@ export const navItems: INavData[] = [
     name: 'Product'
   },
   {
-    name: 'Product',
-    url: '/product',
-    icon: 'fa fa-cube'
-  },
-  {
     title: true,
-    name: 'Category'
+    name: 'Jenis'
   },
   {
-    name: 'Category',
-    url: '/category',
+    name: 'Jenis',
+    url: '/jenis',
     icon: 'fa fa-list'
   },
 ];

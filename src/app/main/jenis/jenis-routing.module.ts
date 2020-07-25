@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CategoryComponent } from './category.component';
+import { JenisComponent } from './jenis.component';
 import { AuthGuard } from '../../core/auth/auth.guard';
 
 
 const routes: Routes = [
   {
     path:'',
-    component:CategoryComponent,
+    component:JenisComponent,
     canActivate:[AuthGuard]
   }
 ];
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CategoryRoutingModule { }
+export class JenisRoutingModule { }

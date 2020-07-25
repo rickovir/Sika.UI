@@ -65,7 +65,7 @@ import { ShareModule } from './share/share.module';
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    RegisterComponent
+    RegisterComponent,
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

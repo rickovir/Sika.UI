@@ -39,20 +39,20 @@ export class TokenInterceptor implements HttpInterceptor{
         const state: RouterStateSnapshot = this.router.routerState.snapshot;
         const token = localStorage.getItem('token');
 
-        if (token !== undefined && token !== '' && token !== null) {
-            const httpHeaders = new HttpHeaders({
-                'accept' : '*/*',
-                'Content-Type': request.headers.get('Content-Type'),
-                'Authorization': `Bearer ${token}`
-            });
+        // if (token !== undefined && token !== '' && token !== null) {
+        //     const httpHeaders = new HttpHeaders({
+        //         'accept' : '*/*',
+        //         'Content-Type': request.headers.get('Content-Type'),
+        //         'Authorization': `Bearer ${token}`
+        //     });
     
-            return next.handle(request.clone({
-                headers: httpHeaders
-            }));
-        }
+        //     return next.handle(request.clone({
+        //         headers: httpHeaders
+        //     }));
+        // }
 
-        if (token == null || token == undefined || token == '') {
+        // if (token == null || token == undefined || token == '') {
             return <any>this.authService.logout(state);
-        }
+        // }
     }
 }

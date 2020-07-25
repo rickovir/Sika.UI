@@ -51,18 +51,14 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'base',
-        loadChildren: () => import('./main/base/base.module').then(m => m.BaseModule)
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./main/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       // Dev kita   
 
       {
-        path:'category',
-        loadChildren:()=> import('./main/category/category.module').then(m=>m.CategoryModule)
+        path:'jenis',
+        loadChildren:()=>import('./main/jenis/jenis.module').then(m=>m.JenisModule)
       }
     ]
   },

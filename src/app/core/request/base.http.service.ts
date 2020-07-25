@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IPagedQuery } from '../../config/models/master.model';
 
 @Injectable({
     providedIn:'root'
@@ -21,6 +22,20 @@ export abstract class BaseHttpService{
 
     getAll():Observable<Object>{
       return this.http.get(`${this.serviceUri}`,  { headers: this.getDefaultAuthHttpRequestHeader() });
+    }
+
+    getListWithPaging(query:IPagedQuery):Observable<Object>{
+      let url = `${this.serviceUri}?`;
+
+      for (const element in query) {
+        if (query[element] && query[element].toString() !== '') {
+          url = `${url}${element}=${query[element]}&`;
+        }
+      }
+  
+      url = url.substring(0, url.length - 1);
+
+      return this.http.get(url,  { headers: this.getDefaultAuthHttpRequestHeader() });
     }
 
     getById(id: number): Observable<Object> {

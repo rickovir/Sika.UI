@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
-export class CategoryService extends BaseAppService {
+export class JenisService extends BaseAppService {
   serviceUri:string;
 
   constructor(protected http:HttpClient) {
     super(http);
-    this.serviceUri = `${environment.apiUrl}/category`;
+    this.serviceUri = `${environment.apiUrl}/jenis`;
   }
 }
