@@ -59,6 +59,14 @@ export const routes: Routes = [
       {
         path:'jenis',
         loadChildren:()=>import('./main/jenis/jenis.module').then(m=>m.JenisModule)
+      },
+      {
+        path:'pemasukan',
+        loadChildren:()=>import('./main/pemasukan/pemasukan.module').then(m=>m.PemasukanModule)
+      },
+      {
+        path:'pengeluaran',
+        loadChildren:()=>import('./main/pengeluaran/pengeluaran.module').then(m=>m.PengeluaranModule)
       }
     ]
   },

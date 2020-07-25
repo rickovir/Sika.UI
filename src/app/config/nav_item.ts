@@ -12,15 +12,25 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Product'
-  },
-  {
-    title: true,
     name: 'Jenis'
   },
   {
     name: 'Jenis',
     url: '/jenis',
     icon: 'fa fa-list'
+  },
+  {
+    title: true,
+    name: 'Transaksi'
+  },
+  {
+    name: 'Pemasukan',
+    url: '/pemasukan',
+    icon: 'fa fa-sign-in'
+  },
+  {
+    name: 'Pengeluaran',
+    url: '/pengeluaran',
+    icon: 'fa fa-shopping-cart'
   },
 ];
