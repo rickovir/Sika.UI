@@ -55,8 +55,8 @@ export class AuthService implements IAppService{
         return this.http.post(`${this.serviceUri}/login`, user, {headers:this.defaultHeader})
         .pipe(switchMap(
             (response:JwtToken)=>{
-                localStorage.setItem('token', response.accessToken);
-                localStorage.setItem('expiresIn', response.expiresIn.toString());
+                localStorage.setItem('accessToken', response.accessToken);
+                localStorage.setItem('refreshToken', response.refreshToken);
 
                 return of('');
             }),
@@ -67,9 +67,16 @@ export class AuthService implements IAppService{
             ));
     }
 
+    refreshToken()
+    {
+        const refreshToken = localStorage.getItem('refreshToken');
+
+        return this.http.get(`${this.serviceUri}/generateToken?refreshToken=${refreshToken}`, {headers:this.defaultHeader});
+    }
+
     logout(state: RouterStateSnapshot = null) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('expiresIn');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
     
         if (state === null) {
             this.router.navigate(['/login']);

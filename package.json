@@ -1,21 +1,15 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
+  "name": "Sistem Kas Masjid",
   "version": "2.9.2",
-  "description": "CoreUI Free Angular 2+ Admin Template",
+  "description": "SIKA",
   "author": {
     "name": "Łukasz Holeczek",
     "url": "http://holeczek.pl",
     "github": "https://github.com/mrholek",
     "twitter": "https://twitter.com/lukaszholeczek"
   },
-  "contributors": [
-    {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
-    }
-  ],
-  "homepage": "https://coreui.io/angular",
-  "copyright": "Copyright 2020 creativeLabs Łukasz Holeczek",
+  "homepage": "",
+  "copyright": "Masjid Jami Annawier",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -55,6 +49,7 @@
     "primeng": "^9.1.0",
     "rxjs": "^6.5.5",
     "simple-line-icons": "^2.4.1",
+    "sweetalert2": "^9.17.1",
     "ts-helpers": "^1.1.2",
     "tslib": "^1.11.1",
     "web-animations-js": "^2.3.2",

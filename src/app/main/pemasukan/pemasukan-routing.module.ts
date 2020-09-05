@@ -8,7 +8,10 @@ const routes: Routes = [
   {
     path:'',
     component:PemasukanComponent,
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: {
+      title: 'Daftar Pemasukan'
+    }
   }
 ];
 

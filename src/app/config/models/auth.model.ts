@@ -11,10 +11,10 @@ export class UserLogin{
 
 export class JwtToken {
     accessToken: string;
-    expiresIn: number;
+    refreshToken: string;
   
     constructor() {
         this.accessToken = '';
-        this.expiresIn = 0;
+        this.refreshToken = '';
     }
 }

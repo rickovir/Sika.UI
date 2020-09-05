@@ -3,6 +3,7 @@ import { BaseComponent } from '../../core/base/base.component';
 import { AuthService } from '../../core/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserLogin } from '../../config/models/auth.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,15 @@ export class LoginComponent extends BaseComponent {
               private router:Router,
               private activatedRoute:ActivatedRoute){
     super(authService);
+
+    this.activatedRoute.params.subscribe(
+      params=>{
+        const type = <string>params['type'];
+        if(type === 'logout'){
+          this.authService.logout();
+        }
+      }
+    )
   }
 
   submit()

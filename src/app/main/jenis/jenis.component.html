@@ -1,29 +1,72 @@
 <div class="animated fadeIn">
     <app-loader [show]="loading"></app-loader>
+
+    <error-alert [errors]="errors"></error-alert>
+
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title mb-0">Jenis</h4>
-            <div class="small text-muted">Daftar Jenis</div>
+        <div class="card-header d-flex flex-column flex-sm-row justify-content-between">
+            <div class="d-inline">
+                <h4 class="card-title mb-0">Jenis</h4>
+                <div class="small text-muted">Daftar Jenis</div>
+            </div>
+            <div class="d-inline">
+                <button class="btn btn-primary" routerLink="add">Tambah Data</button>
+            </div>
         </div>
         <div class="card-body">
             <div class="row">
-                <p-table #tableJenis [value]="listJenis" [lazy]="true" (onLazyLoad)="loadData($event)" [rows]="pageQuery.itemsPerPage" [totalRecords]="totalRecords"  [paginator]="true">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama</th>
-                            <th>Tipe</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-item>
-                        <tr>
-                            <td>{{item.ID}}</td>
-                            <td>{{item.nama}}</td>
-                            <td>{{item.tipe == 'I' ? 'Pemasukan': 'Pengeluaran'}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
+                <div class="col-lg-4">
+                    <div class="input-group mb-3">
+                        <input type="text" 
+                                name="searchJenis" 
+                                [(ngModel)]="pageQuery.search" 
+                                #searchJenis="ngModel" 
+                                class="form-control" 
+                                placeholder="Search"
+                                (keydown.enter)="searchSortData()">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="searchSortData()"><i class="fa fa-search"></i></button>
+                        </div>
+                        <div class="ml-2">
+                            <button class="btn btn-outline-primary" (click)="reset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <p-table #tableJenis 
+                    [value]="listJenis" 
+                    [lazy]="true" 
+                    (onLazyLoad)="loadData($event)" 
+                    [rows]="pageQuery.itemsPerPage" 
+                    [totalRecords]="totalRecords"  
+                    [paginator]="true"
+                    [first]="firstNum"
+                    [sortField]="pageQuery.field" 
+                    [sortOrder]="pageQuery.order">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th width="5%">No</th>
+                        <th pSortableColumn="name">
+                            Nama
+                            <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th>Tipe</th>
+                        <th class="text-center" width="183px">Aksi</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        <td>{{item.nama}}</td>
+                        <td>{{item.tipe == 'I' ? 'Pemasukan': 'Pengeluaran'}}</td>
+                        <td class="text-center" style="width: fit-content;">
+                            <a class="btn btn-primary" placement="top" tooltip="Lihat" routerLink="view/{{ item.ID }}"><i class="fa fa-eye"></i></a>
+                            <a class="btn btn-warning" placement="top" tooltip="Edit" routerLink="edit/{{ item.ID }}"><i class="fa fa-pencil"></i></a>
+                            <button class="btn btn-danger" placement="top" tooltip="Hapus" (click)="delete(item.ID)"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
     </div>
 </div>

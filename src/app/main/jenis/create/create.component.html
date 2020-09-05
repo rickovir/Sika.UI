@@ -1,0 +1,19 @@
+<div class="animated fadeIn">
+    <app-loader [show]="loading"></app-loader>
+    <div class="card">
+        <div class="card-header d-flex flex-column flex-sm-row justify-content-between">
+            <div class="d-inline">
+                <h4 class="card-title mb-0">Tambah Jenis</h4>
+            </div>
+            
+            <div class="d-inline">
+                <button class="btn btn-outline-primary" routerLink="/jenis">Kembali</button>
+            </div>
+            
+        </div>
+        <div class="card-body">
+            <app-form [formData]="dataJenis" (onFormSubmited)="sendCreateData($event)"></app-form>
+            <error-alert [errors]="errors"></error-alert>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<form #jenisForm="ngForm" name="jenisForm" (ngSubmit)="submitForm()">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Judul</label>
+                <input [(ngModel)]="formData.nama" 
+                    [disabled]="formType=='view'" 
+                    type="text" 
+                    name="namaJenis"
+                    class="form-control" 
+                    required 
+                    placeholder="Judul"
+                    autocomplete="off" 
+                    #namaJenis="ngModel" />
+
+                <div class="valid-feedback" [style.display]="namaJenis.valid ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="namaJenis.invalid ? 'block':'none'">Mohon isi data</div>
+            </div>
+
+            <div class="form-group">
+                <label>Tipe</label>
+                <select class="form-control" 
+                        [(ngModel)]="formData.tipe" 
+                        name="tipeJenis" 
+                        #tipeJenis="ngModel" 
+                        [disabled]="formType=='view'" 
+                        required>
+                    <option [value]="''" disabled>Pilih Tipe Jenis</option>
+                    <option value="I">Pemasukan</option>
+                    <option value="O">Pengeluaran</option>
+                </select>
+
+                <div class="valid-feedback" [style.display]="tipeJenis.valid ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="tipeJenis.invalid ? 'block':'none'">Mohon pilih tipe jenis</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="jenisForm.invalid || formType == 'view'">Submit</button>
+            <button class="btn btn-outline-secondary" routerLink="/jenis">Batal</button>
+        </div>
+    </div>
+</form>

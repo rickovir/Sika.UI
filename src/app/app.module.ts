@@ -42,6 +42,13 @@ import { ChartsModule } from 'ng2-charts';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './core/request/token-interceptor.service';
 import { ShareModule } from './share/share.module';
+import { PageQueryHistoryService } from './core/common/page-query-history.service';
+
+//register locale ID
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/id';
+
+registerLocaleData(localeFr, 'id');
 
 @NgModule({
   imports: [
@@ -69,7 +76,8 @@ import { ShareModule } from './share/share.module';
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
-    {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true},
+    PageQueryHistoryService
   ],
   bootstrap: [ AppComponent ]
 })

@@ -16,7 +16,7 @@ export abstract class BaseHttpService{
         return new HttpHeaders({
             'accept' : '*/*',
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         })
     }
 
@@ -47,7 +47,8 @@ export abstract class BaseHttpService{
     }
   
     put(data: any): Observable<Object> {
-      return this.http.put(`${this.serviceUri}/${data.id}`, JSON.stringify(data), { headers: this.getDefaultAuthHttpRequestHeader() });
+      const id = data?.id ? data?.id : data?.ID;
+      return this.http.put(`${this.serviceUri}/${id}`, JSON.stringify(data), { headers: this.getDefaultAuthHttpRequestHeader() });
     }
   
     delete(id): Observable<Object> {

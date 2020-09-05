@@ -5,7 +5,7 @@ import { Input, Component } from '@angular/core';
     template:`
     <div class="backdrop" *ngIf="show">
         <div class="spinner">
-            <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
         </div>
     </div>
     `,
