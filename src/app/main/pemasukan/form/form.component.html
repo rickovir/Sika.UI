@@ -1,0 +1,143 @@
+<form #pemasukanForm="ngForm" name="pemasukanForm" (ngSubmit)="submitForm()">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Nomor Kas</label>
+                <input [(ngModel)]="formData.nomorKas" 
+                    [disabled]="formType=='view'" 
+                    type="text" 
+                    name="nomorKas"
+                    class="form-control" 
+                    required 
+                    placeholder="Nomor Kas"
+                    autocomplete="off" 
+                    #nomorKas="ngModel" />
+
+                <div class="valid-feedback" [style.display]="nomorKas.valid ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="nomorKas.invalid ? 'block':'none'">Mohon isi data</div>
+            </div>
+            <div class="form-group">
+                <label>Judul</label>
+                <input [(ngModel)]="formData.judul" 
+                    [disabled]="formType=='view'" 
+                    type="text" 
+                    name="judul"
+                    class="form-control" 
+                    required 
+                    placeholder="Judul"
+                    autocomplete="off" 
+                    #judul="ngModel" />
+
+                <div class="valid-feedback" [style.display]="judul.valid ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="judul.invalid ? 'block':'none'">Mohon isi data</div>
+            </div>
+            <div class="form-group">
+                <label>Jumlah</label>
+                <input [(ngModel)]="formData.jumlah" 
+                    [disabled]="formType=='view'" 
+                    type="text" 
+                    name="jumlah"
+                    class="form-control" 
+                    required 
+                    placeholder="Jumlah"
+                    autocomplete="off" 
+                    #jumlah="ngModel" />
+
+                <div class="valid-feedback" [style.display]="nomorKas.valid ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="nomorKas.invalid ? 'block':'none'">Mohon isi data</div>
+            </div>
+            <div class="form-group">
+                <label>Nama Penanggung Jawab</label>
+                <input [(ngModel)]="formData.namaPenanggungJawab" 
+                    [disabled]="formType=='view'" 
+                    type="text" 
+                    name="namaPenanggungJawab"
+                    class="form-control" 
+                    required 
+                    placeholder="Nama Penanggung Jawab"
+                    autocomplete="off" 
+                    #namaPenanggungJawab="ngModel" />
+
+                <div class="valid-feedback" [style.display]="namaPenanggungJawab.valid ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="namaPenanggungJawab.invalid ? 'block':'none'">Mohon isi data</div>
+            </div>
+            <div class="form-group">
+                <label>Tanggal</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend" (click)="dp.toggle()">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                    </div>
+                    <input type="text" 
+                        class="form-control" 
+                        placeholder="Masukan tanggal" 
+                        bsDatepicker 
+                        (bsValueChange)="onDateChange($event)"
+                        [bsConfig]="{dateInputFormat: 'DD MMM YYYY'}" 
+                        name="tanggal" 
+                        #dp="bsDatepicker"
+                        [disabled]="formType=='view'"
+                        autocomplete="off">
+                </div>
+
+                <div class="valid-feedback" [style.display]="formData.tanggal ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="!formData.tanggal ? 'block':'none'">Mohon isi data</div>
+            </div>
+            
+            <div class="form-group">
+                <label>Upload Bukti Gambar</label>
+                <input class="btn btn-outline-secondary text-dark" 
+                    style="display: block;" 
+                    type="file" 
+                    accept=".png, .jpeg, .jpg" 
+                    data-max-size="5120" 
+                    id="fileupload" name="fileupload" 
+                    [disabled]="formType=='view'" 
+                    (change)="onChangeFile($event)" />
+                
+                <img class="preview mt-2" [src]="imgPreview" style="max-width: 500px; min-width: 300px" alt="">
+                <div class="process-upload" *ngIf="isUploadProgress">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" [style.width.%]="progress" aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
+                    </div>
+                </div>
+                
+                <div class="d-block mt-2" *ngIf="imgErrors?.length != 0">
+                    <alert type="danger" dismissible="true" (onClosed)="onClosedAlertImgErrors()">
+                    <div *ngFor="let error of imgErrors">
+                        <b>Attention!</b> {{error}}
+                    </div>
+                    </alert>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Keterangan</label>
+                <textarea class="form-control" 
+                    name="message" 
+                    placeholder="Masukan Keterangan .." 
+                    autocomplete="off" 
+                    rows="10" 
+                    [(ngModel)]="formData.keterangan" 
+                    #keterangan="ngModel" 
+                    [disabled]="formType=='view'">
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Jenis</label>
+                <p-autoComplete inputStyleClass="form-control" 
+                                styleClass="d-block" 
+                                (onSelect)="onSelectJenis($event)" 
+                                [suggestions]="jenisSugestions" 
+                                field="nama" [size]="10" 
+                                (completeMethod)="onSearchJenis($event)"
+                                placeholder="Jenis" [minLength]="1"
+                                [disabled]="formType=='view'"></p-autoComplete>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary" [disabled]="pemasukanForm.invalid || formType == 'view'">Submit</button>
+            <button class="btn btn-outline-secondary" routerLink="/pemasukan">Batal</button>
+        </div>
+    </div>
+</form>

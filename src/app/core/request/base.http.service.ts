@@ -19,6 +19,12 @@ export abstract class BaseHttpService{
             'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         })
     }
+    
+    getMultiPartAuthHttpRequestHeader(): HttpHeaders {
+      return new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+      });
+    }
 
     getAll():Observable<Object>{
       return this.http.get(`${this.serviceUri}`,  { headers: this.getDefaultAuthHttpRequestHeader() });

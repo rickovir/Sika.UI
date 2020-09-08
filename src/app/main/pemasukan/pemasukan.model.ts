@@ -43,3 +43,9 @@ export class PemasukanPageQuery implements IPagedQuery, ISortable{
         this.order= 1;
     }
 }
+
+export class PemasukanFormData extends Pemasukan{
+    constructor(){
+        super();
+    }
+}

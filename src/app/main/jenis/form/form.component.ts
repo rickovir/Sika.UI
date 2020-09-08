@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { JenisFormData } from '../jenis.model';
 import { JenisService } from '../jenis.service';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form',

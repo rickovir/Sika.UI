@@ -5,19 +5,30 @@ import { PemasukanRoutingModule } from './pemasukan-routing.module';
 import { PemasukanComponent } from './pemasukan.component';
 import { PemasukanService } from './pemasukan.service';
 import { ShareModule } from '../../share/share.module';
+import { ViewComponent } from './view/view.component';
+import { FormComponent } from './form/form.component';
+import { CreateComponent } from './create/create.component';
+
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { JenisService } from '../jenis/jenis.service';
 
 
 @NgModule({
   declarations: [
-    PemasukanComponent
+    PemasukanComponent,
+    ViewComponent,
+    FormComponent,
+    CreateComponent
   ],
   imports: [
     CommonModule,
     PemasukanRoutingModule,
-    ShareModule
+    ShareModule,
+    AutoCompleteModule
   ],
   providers:[
-    PemasukanService
+    PemasukanService,
+    JenisService
   ],
   entryComponents:[
     PemasukanComponent

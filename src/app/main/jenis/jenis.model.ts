@@ -31,13 +31,8 @@ export class JenisPageQuery implements IPagedQuery, ISortable{
     }
 }
 
-export class JenisFormData{
-    id:number;
-    nama:string;
-    tipe:string;
+export class JenisFormData extends Jenis{
     constructor(){
-        this.id = 0;
-        this.nama = "";
-        this.tipe = "";
+        super();
     }
 }
