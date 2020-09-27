@@ -18,4 +18,9 @@ export class PemasukanService extends BaseAppService {
 
     return this.httpService.post(`${this.serviceUri}/Upload`, formData, { headers: this.getMultiPartAuthHttpRequestHeader(),reportProgress:true,observe:'events' });
   }
+
+  getImage(imgPath:string)
+  {
+    return this.httpService.get(`${this.serviceUri}/image/${imgPath}`, {headers:this.getMultiPartAuthHttpRequestHeader(),reportProgress:true,observe:'events'});
+  }
 }

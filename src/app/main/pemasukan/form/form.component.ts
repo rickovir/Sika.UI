@@ -4,16 +4,17 @@ import { PemasukanService } from '../pemasukan.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { JenisService } from '../../jenis/jenis.service';
 import { IPagedQuery, ISimpleMasterData, IPagedResult } from '../../../config/models/master.model';
+import { JenisPageQuery } from '../../jenis/jenis.model';
+import { error } from 'protractor';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html',
-  styles: [
-  ]
+  templateUrl: './form.component.html'
 })
 export class FormComponent implements OnInit {
   @Input() formType:string;
-  @Input() formData:PemasukanFormData;
+  formData:PemasukanFormData = new PemasukanFormData();
   @Output() onFormSubmited = new EventEmitter<PemasukanFormData>();
   
   imgUpload: any = null;
@@ -24,10 +25,31 @@ export class FormComponent implements OnInit {
   isUploadProgress: boolean = false;
 
   jenisSugestions:ISimpleMasterData[];
+  jenisTotalRecord:number = 0;
 
-  constructor(private pemasukanService:PemasukanService, private jenisService:JenisService) { }
+  constructor(private pemasukanService:PemasukanService, private jenisService:JenisService) {
+    this.pemasukanService.dataState$.subscribe(
+      (data:any)=>{
+        if(data)
+        {
+          this.formData = data;
+
+          if(this.formType == 'view' || this.formType == 'edit')
+          {
+            this.imgPreview = this.formData?.imageUrl ? `${environment.apiUrl}/other/pemasukanImg/${this.formData?.imageUrl}`:null;
+          }
+        }
+      }
+    )
+  }
 
   ngOnInit(): void {
+    let jenisQuery:JenisPageQuery = {
+      ...new JenisPageQuery(),
+      ...{tipe:'I'}
+    };
+    this.getJenis(jenisQuery);
+
   }
   
   submitForm()
@@ -61,22 +83,30 @@ export class FormComponent implements OnInit {
 
   }
 
-  onSearchJenis(event)
+  onSearchJenis(event:IPagedQuery)
   {
-    let jenisQuery:IPagedQuery = {
-      page:1,
-      itemsPerPage:10,
-      search:event.query
+    let jenisQuery:JenisPageQuery = {
+      ...new JenisPageQuery(),
+      ...event,
+      ...{tipe:'I'}
     };
+    this.getJenis(jenisQuery);
+    
+  }
+
+  getJenis(jenisQuery)
+  {
     this.jenisService.getListWithPaging(jenisQuery).subscribe(
       (data:IPagedResult)=>{
         this.jenisSugestions = data.data;
+        this.jenisTotalRecord = data.totalRecords;
       }
     )
   }
 
   onSelectJenis(event:ISimpleMasterData){
     this.formData.jenisID = event.ID;
+    console.log(event)
   }
 
   onChangeFile(event) {
@@ -94,7 +124,9 @@ export class FormComponent implements OnInit {
 
   onDateChange(event:Date)
   {
-    this.formData.tanggal = `${event.getFullYear()}/${event.getMonth() +1}/${event.getDate()}`;
+    event.setHours(0,0,0,0);
+
+    this.formData.tanggal = event.toJSON();
   }
 
   onClosedAlertImgErrors()

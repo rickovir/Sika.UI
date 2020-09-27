@@ -1,4 +1,4 @@
-<form #pemasukanForm="ngForm" name="pemasukanForm" (ngSubmit)="submitForm()">
+<form #pemasukanForm="ngForm" name="pemasukanForm" (ngSubmit)="submitForm()" id="formPemasukan">
     <div class="row">
         <div class="col-lg-6">
             <div class="form-group">
@@ -35,7 +35,7 @@
                 <label>Jumlah</label>
                 <input [(ngModel)]="formData.jumlah" 
                     [disabled]="formType=='view'" 
-                    type="text" 
+                    type="number" 
                     name="jumlah"
                     class="form-control" 
                     required 
@@ -92,9 +92,9 @@
                     data-max-size="5120" 
                     id="fileupload" name="fileupload" 
                     [disabled]="formType=='view'" 
-                    (change)="onChangeFile($event)" />
+                    (change)="onChangeFile($event)" required/>
                 
-                <img class="preview mt-2" [src]="imgPreview" style="max-width: 500px; min-width: 300px" alt="">
+                <img class="preview mt-2" *ngIf="imgPreview" [src]="imgPreview" style="max-width: 500px; min-width: 300px" alt="">
                 <div class="process-upload" *ngIf="isUploadProgress">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" [style.width.%]="progress" aria-valuemin="0" aria-valuemax="100">{{progress}}%</div>
@@ -108,6 +108,9 @@
                     </div>
                     </alert>
                 </div>
+
+                <div class="valid-feedback" [style.display]="imgPreview ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="!imgPreview ? 'block':'none'">Mohon isi data</div>
             </div>
             
             <div class="form-group">
@@ -125,14 +128,17 @@
 
             <div class="form-group">
                 <label>Jenis</label>
-                <p-autoComplete inputStyleClass="form-control" 
-                                styleClass="d-block" 
-                                (onSelect)="onSelectJenis($event)" 
-                                [suggestions]="jenisSugestions" 
-                                field="nama" [size]="10" 
-                                (completeMethod)="onSearchJenis($event)"
-                                placeholder="Jenis" [minLength]="1"
-                                [disabled]="formType=='view'"></p-autoComplete>
+                <selectPaging class="form-control select-paging" 
+                    [options]="jenisSugestions" 
+                    [totalRecords]="jenisTotalRecord" 
+                    rows="10" 
+                    [disabled]="formType=='view'" 
+                    (onChange)="onSelectJenis($event)" 
+                    (onLoad)="onSearchJenis($event)">
+                </selectPaging>
+                <input type="hidden" [value]="formData.jenisID" name="jenisHide" required />
+                <div class="valid-feedback" [style.display]="formData.jenisID ? 'block':'none'">Valid</div>
+                <div class="invalid-feedback" [style.display]="!formData.jenisID ? 'block':'none'">Mohon isi data</div>
             </div>
         </div>
         <div class="col-lg-12">

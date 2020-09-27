@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PemasukanComponent } from './pemasukan.component';
 import { AuthGuard } from '../../core/auth/auth.guard';
 import { CreateComponent } from './create/create.component';
+import { ViewComponent } from './view/view.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,15 @@ const routes: Routes = [
     data: {
       title: 'Tambah Pemasukan'
     }
-  }
+  },
+  {
+    path:'view/:id',
+    component:ViewComponent,
+    canActivate:[AuthGuard],
+    data: {
+      title: 'View Pemasukan'
+    }
+  },
 ];
 
 @NgModule({

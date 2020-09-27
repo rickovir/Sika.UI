@@ -12,7 +12,7 @@
             
         </div>
         <div class="card-body">
-            <app-form [formData]="dataPemasukan" (onFormSubmited)="sendCreateData($event)"></app-form>
+            <app-form (onFormSubmited)="sendCreateData($event)"></app-form>
             <error-alert [errors]="errors"></error-alert>
         </div>
     </div>

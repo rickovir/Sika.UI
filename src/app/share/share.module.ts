@@ -8,6 +8,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { ErrorAlertModule } from './error-alert/error-alert.module';
+import { SelectPagingModule } from './select-paging/select-paging.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ErrorAlertModule } from './error-alert/error-alert.module';
     ErrorAlertModule,
     TableModule,
     TooltipModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    SelectPagingModule
   ],
   exports:[
     AlertModule,
@@ -29,7 +31,8 @@ import { ErrorAlertModule } from './error-alert/error-alert.module';
     TableModule,
     ErrorAlertModule,
     TooltipModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    SelectPagingModule
   ]
 })
 export class ShareModule { }
