@@ -3,16 +3,16 @@
     <div class="card">
         <div class="card-header d-flex flex-column flex-sm-row justify-content-between">
             <div class="d-inline">
-                <h4 class="card-title mb-0">Tambah Pemasukan</h4>
+                <h4 class="card-title mb-0">Ubah data Pengeluaran</h4>
             </div>
             
             <div class="d-inline">
-                <button class="btn btn-outline-primary" routerLink="/pemasukan">Kembali</button>
+                <button class="btn btn-outline-primary" routerLink="/pengeluaran">Kembali</button>
             </div>
             
         </div>
         <div class="card-body">
-            <app-form formType="add" (onFormSubmited)="sendCreateData($event)"></app-form>
+            <app-form formType="edit" (onFormSubmited)="submitData($event)"></app-form>
             <error-alert [errors]="errors"></error-alert>
         </div>
     </div>

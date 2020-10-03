@@ -6,21 +6,21 @@
     <div class="card">
         <div class="card-header d-flex flex-column flex-sm-row justify-content-between">
             <div class="d-inline">
-                <h4 class="card-title mb-0">Pengeluaran</h4>
-                <div class="small text-muted">Daftar Pengeluaran</div>
+                <h4 class="card-title mb-0">Arus Kas</h4>
+                <div class="small text-muted">Daftar Arus Kas</div>
             </div>
-            <div class="d-inline">
+            <!-- <div class="d-inline">
                 <button class="btn btn-primary" routerLink="add">Tambah Data</button>
-            </div>
+            </div> -->
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="input-group mb-3">
                         <input type="text" 
-                                name="searchPengeluaran" 
+                                name="searchCashFlow" 
                                 [(ngModel)]="pageQuery.search" 
-                                #searchPengeluaran="ngModel" 
+                                #searchCashFlow="ngModel" 
                                 class="form-control" 
                                 placeholder="Search"
                                 (keydown.enter)="searchSortData()">
@@ -33,8 +33,8 @@
                     </div>
                 </div>
             </div>
-            <p-table #tablePengeluaran 
-                    [value]="listPengeluaran" 
+            <p-table #tablePemasukan 
+                    [value]="listPemasukan" 
                     [lazy]="true" 
                     (onLazyLoad)="loadData($event)" 
                     [rows]="pageQuery.itemsPerPage" 
@@ -48,8 +48,10 @@
                         <th width="5%">No</th>
                         <th>Nomor Kas</th>
                         <th>Tanggal</th>
-                        <th>Penanggung Jawab</th>
-                        <th>Jumlah</th>
+                        <th>Judul</th>
+                        <th>Debit</th>
+                        <th>Kredit</th>
+                        <th>Arus Kas</th>
                         <th class="text-center" width="183px">Aksi</th>
                     </tr>
                 </ng-template>
@@ -57,15 +59,19 @@
                     <tr>
                         <td>{{ i+1 }}</td>
                         <td>{{item.nomorKas}}</td>
-                        <td>{{item.tanggal | date:'d-MMM-y hh:mm'}}</td>
-                        <td>{{item.namaPenanggungJawab}}</td>
-                        <td>{{item.jumlah | currency:'IDR':'Rp. ':'.0':'id'}}</td>
+                        <td>{{item.tanggal | date:'d MMMM y'}}</td>
+                        <td>{{item.judulKas}}</td>
+                        <td>{{item.debit | currency:'IDR':'Rp. ':'.0':'id'}}</td>
+                        <td>{{item.kredit | currency:'IDR':'Rp. ':'.0':'id'}}</td>
+                        <td [class.text-danger]="item.arusKas < 0">
+                            {{item.arusKas | currency:'IDR':'Rp. ':'.0':'id'}}
+                        </td>
                         <td class="text-center" style="width: fit-content;">
-                            <a class="btn btn-primary" placement="top" tooltip="Lihat" routerLink="view/{{ item.ID }}"><i class="fa fa-eye"></i></a>
-                            <a class="btn btn-warning" placement="top" tooltip="Edit" routerLink="edit/{{ item.ID }}"><i class="fa fa-pencil"></i></a>
-                            <button class="btn btn-danger" placement="top" tooltip="Hapus" (click)="delete(item.ID)">
+                            <!-- <a class="btn btn-primary" placement="top" tooltip="Lihat" routerLink="view/{{ item.ID }}"><i class="fa fa-eye"></i></a> -->
+                            <!-- <a class="btn btn-warning" placement="top" tooltip="Edit" routerLink="edit/{{ item.ID }}"><i class="fa fa-pencil"></i></a> -->
+                            <!-- <button class="btn btn-danger" placement="top" tooltip="Hapus" (click)="delete(item.ID)">
                                 <i class="fa fa-trash"></i>
-                            </button>
+                            </button> -->
                         </td>
                     </tr>
                 </ng-template>

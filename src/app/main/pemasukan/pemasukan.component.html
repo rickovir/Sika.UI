@@ -50,7 +50,6 @@
                         <th>Tanggal</th>
                         <th>Penanggung Jawab</th>
                         <th>Jumlah</th>
-                        <th>Status</th>
                         <th class="text-center" width="183px">Aksi</th>
                     </tr>
                 </ng-template>
@@ -61,10 +60,6 @@
                         <td>{{item.tanggal | date:'d MMMM y'}}</td>
                         <td>{{item.namaPenanggungJawab}}</td>
                         <td>{{item.jumlah | currency:'IDR':'Rp. ':'.0':'id'}}</td>
-                        <td>
-                            <button type="button" *ngIf="item.isDraft" style="cursor: default;" class="btn btn-sm btn-secondary">Draft</button>
-                            <button type="button" *ngIf="!item.isDraft" style="cursor: default;" class="btn btn-sm btn-primary">Aktif</button>
-                        </td>
                         <td class="text-center" style="width: fit-content;">
                             <a class="btn btn-primary" placement="top" tooltip="Lihat" routerLink="view/{{ item.ID }}"><i class="fa fa-eye"></i></a>
                             <a class="btn btn-warning" placement="top" tooltip="Edit" routerLink="edit/{{ item.ID }}"><i class="fa fa-pencil"></i></a>

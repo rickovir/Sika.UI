@@ -11,6 +11,7 @@ export class Pengeluaran{
     namaPenanggungJawab: string;
     jumlah: number;
     jenisID: number;
+    jenisNama:string;
 
     constructor()
     {
@@ -24,6 +25,7 @@ export class Pengeluaran{
         this.namaPenanggungJawab = "";
         this.jumlah = 0;
         this.jenisID = 0;
+        this.jenisNama="";
     }
 }
 
@@ -41,5 +43,12 @@ export class PengeluaranPageQuery implements IPagedQuery, ISortable{
         this.search="";
         this.field = "";
         this.order= 1;
+    }
+}
+
+export class PengeluaranFormData extends Pengeluaran{
+    constructor()
+    {
+        super();
     }
 }

@@ -4,6 +4,7 @@ import { PemasukanComponent } from './pemasukan.component';
 import { AuthGuard } from '../../core/auth/auth.guard';
 import { CreateComponent } from './create/create.component';
 import { ViewComponent } from './view/view.component';
+import { EditComponent } from './edit/edit.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,14 @@ const routes: Routes = [
     canActivate:[AuthGuard],
     data: {
       title: 'Tambah Pemasukan'
+    }
+  },
+  {
+    path:'edit/:id',
+    component:EditComponent,
+    canActivate:[AuthGuard],
+    data: {
+      title: 'Edit Pemasukan'
     }
   },
   {

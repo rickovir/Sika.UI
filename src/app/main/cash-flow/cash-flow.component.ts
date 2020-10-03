@@ -1,62 +1,62 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BaseComponent } from '../../core/base/base.component';
-import { PemasukanService } from './pemasukan.service';
-import { PageQueryHistoryService } from '../../core/common/page-query-history.service';
 import { Router } from '@angular/router';
-import { PemasukanPageQuery, Pemasukan } from './pemasukan.model';
 import { Table } from 'primeng/table';
-import { IPagedResult } from '../../config/models/master.model';
 import Swal from 'sweetalert2';
+import { IPagedResult } from '../../config/models/master.model';
+import { BaseComponent } from '../../core/base/base.component';
+import { PageQueryHistoryService } from '../../core/common/page-query-history.service';
+import { CashFlow, CashFlowPageQuery } from './cash-flow.model';
+import { CashFlowService } from './cash-flow.service';
 
 @Component({
-  selector: 'app-pemasukan',
-  templateUrl: './pemasukan.component.html',
-  styleUrls: ['./pemasukan.component.css']
+  selector: 'app-cash-flow',
+  templateUrl: './cash-flow.component.html',
+  styleUrls: ['./cash-flow.component.css']
 })
-export class PemasukanComponent extends BaseComponent implements OnInit {
-  @ViewChild('tablePemasukan') table: Table;
+export class CashFlowComponent extends BaseComponent implements OnInit {
+  @ViewChild('tableCashFlow') table: Table;
   errors:string[] = [];
 
-  listPemasukan:Pemasukan[] = [];
+  listPemasukan:CashFlow[] = [];
   totalRecords:number=0;
   firstNum: number=0;
 
-  pageQuery:PemasukanPageQuery = new PemasukanPageQuery();
+  pageQuery:CashFlowPageQuery = new CashFlowPageQuery();
 
-  constructor(protected pemasukanService:PemasukanService, private pageQueryHistoryService:PageQueryHistoryService, private router:Router) {
-    super(pemasukanService);
+  constructor(protected cashFlowService:CashFlowService, private pageQueryHistoryService:PageQueryHistoryService, private router:Router) {
+    super(cashFlowService);
 
     this.pageQueryHistoryService.setCurrentState(this.router.url, this.pageQuery, 
       (data)=>{
         this.firstNum = (data.page -1) * data.itemsPerPage;
-        this.pageQuery = <PemasukanPageQuery>data;
+        this.pageQuery = <CashFlowPageQuery>data;
       });
   }
 
   ngOnInit(): void {
-    this.pemasukanService.setLoading(true)
+    this.cashFlowService.setLoading(true)
   }
 
   getList()
   {
-    this.pemasukanService.setLoading(true);
+    this.cashFlowService.setLoading(true);
 
     // this is run in first load
     this.pageQueryHistoryService.recordChanges(this.pageQuery, (data)=>{
-      this.pageQuery = <PemasukanPageQuery>data;
+      this.pageQuery = <CashFlowPageQuery>data;
     });
 
-    this.pemasukanService.getListWithPaging(this.pageQuery)
+    this.cashFlowService.getListWithPaging(this.pageQuery)
     .subscribe(
       (data:IPagedResult)=>{
         this.listPemasukan = data.data;
         this.totalRecords = data.totalRecords;
-        this.pemasukanService.setLoading(false);
+        this.cashFlowService.setLoading(false);
       },
       (error)=>
       {
         console.error('error', error);
-        this.pemasukanService.setLoading(false);
+        this.cashFlowService.setLoading(false);
       }
     )
   }
@@ -84,7 +84,7 @@ export class PemasukanComponent extends BaseComponent implements OnInit {
     this.table.sortOrder = 0;
     this.table.first = 0;
 
-    this.pageQuery = new PemasukanPageQuery();
+    this.pageQuery = new CashFlowPageQuery();
 
     this.table.reset();
   }
@@ -102,11 +102,11 @@ export class PemasukanComponent extends BaseComponent implements OnInit {
       cancelButtonText:'Tidak'
     }).then((result) => {
       if (result.value) {
-        this.pemasukanService.setLoading(true);
+        this.cashFlowService.setLoading(true);
 
-        this.pemasukanService.delete(id).subscribe(
+        this.cashFlowService.delete(id).subscribe(
           ()=>{
-            this.pemasukanService.setLoading(false);
+            this.cashFlowService.setLoading(false);
             this.getList();
             
             Swal.fire(
@@ -116,7 +116,7 @@ export class PemasukanComponent extends BaseComponent implements OnInit {
             );
           },
           (error)=>{
-            this.pemasukanService.setLoading(false);
+            this.cashFlowService.setLoading(false);
             Swal.fire(
               'Gagal!',
               'Data gagal dihapus.',

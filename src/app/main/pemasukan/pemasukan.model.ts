@@ -11,6 +11,7 @@ export class Pemasukan{
     namaPenanggungJawab: string;
     jumlah: number;
     jenisID: number;
+    jenisNama: string;
 
     constructor()
     {
@@ -24,6 +25,7 @@ export class Pemasukan{
         this.namaPenanggungJawab = "";
         this.jumlah = 0;
         this.jenisID = 0;
+        this.jenisNama = "";
     }
 }
 
