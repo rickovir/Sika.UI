@@ -18,7 +18,7 @@ COPY . /app
 # generate build
 # ARG configuration=staging
 RUN node --max_old_space_size=2048 ./node_modules/@angular/cli/bin/ng build --output-path=dist
-RUN npm run post-build
+# RUN npm run post-build
 
 # base image
 FROM nginx:1.16.0-alpine
@@ -26,8 +26,8 @@ FROM nginx:1.16.0-alpine
 # copy artifact build from the 'build environment'
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# expose port 3000
-EXPOSE 3000
+# expose port 80
+EXPOSE 80
 
 # run nginx
 CMD ["nginx", "-g", "daemon off;"]
