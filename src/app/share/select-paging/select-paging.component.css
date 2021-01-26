@@ -1,0 +1,52 @@
+#selectpaging ul{
+	padding: 0;
+	list-style: none;
+	background: #FFF;
+	position: relative;
+	z-index: 99;
+	margin-left: -10px;
+	margin-top: 5px;
+    box-shadow: 0px 2px 4px 0px #ccc;
+}
+
+#selectpaging ul li{
+	cursor: pointer;
+	padding: 2px 10px;
+}
+#selectpaging ul li.active{
+	background: #007ad9;
+	color: #FFF;
+}
+#selectpaging ul li:hover{
+	background: #007ad9;
+	color: #FFF;
+}
+#selectpaging ul li#filter, #selectpaging ul li:last-child{
+	background: #FFF !important;
+}
+
+#selectpaging .page-item{
+	padding: 0 !important;
+}
+#selectpaging ul ul.pagination{
+	box-shadow: none !important;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+#selectpaging ul li:hover .pagination li{
+	color: #23282c;
+}
+#selectpaging .pagination li:hover{
+	background: #fff !important;
+}
+
+#selectpaging .pagination li a.active{
+	background: #007ad9;
+	color: #FFF;
+}
+
+#selectpaging .search-box{
+	width: 100%;
+	border: 1px solid #ccc;
+	padding: 3px 5px;
+}

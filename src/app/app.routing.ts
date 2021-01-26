@@ -67,6 +67,10 @@ export const routes: Routes = [
       {
         path:'pengeluaran',
         loadChildren:()=>import('./main/pengeluaran/pengeluaran.module').then(m=>m.PengeluaranModule)
+      },
+      {
+        path:'cash-flow',
+        loadChildren:()=>import('./main/cash-flow/cash-flow.module').then(m=>m.CashFlowModule)
       }
     ]
   },

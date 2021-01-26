@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PemasukanFormData } from '../pemasukan.model';
-import { PemasukanService } from '../pemasukan.service';
+import { PengeluaranFormData } from '../pengeluaran.model';
+import { PengeluaranService } from '../pengeluaran.service';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { JenisService } from '../../jenis/jenis.service';
 import { IPagedQuery, ISimpleMasterData, IPagedResult } from '../../../config/models/master.model';
@@ -13,8 +13,8 @@ import { environment } from '../../../../environments/environment';
 })
 export class FormComponent implements OnInit {
   @Input() formType:string;
-  formData:PemasukanFormData = new PemasukanFormData();
-  @Output() onFormSubmited = new EventEmitter<PemasukanFormData>();
+  formData:PengeluaranFormData = new PengeluaranFormData();
+  @Output() onFormSubmited = new EventEmitter<PengeluaranFormData>();
   
   imgUpload: any = null;
 
@@ -26,22 +26,21 @@ export class FormComponent implements OnInit {
   jenisSugestions:ISimpleMasterData[];
   jenisTotalRecord:number = 0;
 
+  initialDate:Date;
+
   selectedJenis:ISimpleMasterData;
 
-  initialDate:Date = new Date();
-
-  constructor(private pemasukanService:PemasukanService, private jenisService:JenisService) {
-    this.pemasukanService.dataState$.subscribe(
+  constructor(private pengeluaranService:PengeluaranService, private jenisService:JenisService) {
+    this.pengeluaranService.dataState$.subscribe(
       (data:any)=>{
         if(data)
         {
           this.formData = data;
-
           this.initialDate = this.formData.tanggal.length ? new Date(this.formData.tanggal) : new Date();
 
           if(this.formType == 'view' || this.formType == 'edit')
           {
-            this.imgPreview = this.formData?.imageUrl ? `${environment.apiUrl}/other/pemasukanImg/${this.formData?.imageUrl}`:null;
+            this.imgPreview = this.formData?.imageUrl ? `${environment.apiUrl}/other/pengeluaranImg/${this.formData?.imageUrl}`:null;
             this.selectedJenis = {ID:this.formData.jenisID, nama:this.formData.jenisNama}
           }
         }
@@ -52,7 +51,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     let jenisQuery:JenisPageQuery = {
       ...new JenisPageQuery(),
-      ...{tipe:'I'}
+      ...{tipe:'O'}
     };
     this.getJenis(jenisQuery);
 
@@ -68,7 +67,7 @@ export class FormComponent implements OnInit {
           return;
         }
 
-        this.pemasukanService.postImage(this.imgUpload).toPromise().then(
+        this.pengeluaranService.postImage(this.imgUpload).toPromise().then(
           (event: HttpEvent<any>) => {
             switch (event.type) {
               case HttpEventType.UploadProgress:
@@ -84,7 +83,7 @@ export class FormComponent implements OnInit {
             }
           },
           error => {
-            this.pemasukanService.setLoading(false);
+            this.pengeluaranService.setLoading(false);
             reject(error);
           });
       }
@@ -93,7 +92,7 @@ export class FormComponent implements OnInit {
   
   submitForm()
   {
-    this.pemasukanService.setLoading(true);
+    this.pengeluaranService.setLoading(true);
     
     this.uploadImage().then(
       (data:string)=>{
@@ -115,7 +114,7 @@ export class FormComponent implements OnInit {
     let jenisQuery:JenisPageQuery = {
       ...new JenisPageQuery(),
       ...event,
-      ...{tipe:'I'}
+      ...{tipe:'O'}
     };
     this.getJenis(jenisQuery);
     

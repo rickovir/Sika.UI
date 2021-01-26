@@ -1,0 +1,31 @@
+<div class="m-0 p-0" id="selectpaging">
+	<div class="m-0 p-0 placeholder-content pointer-cursor font-weight-bold" [ngClass]="{'text-black-50 border-secondary':disabled}" (click)="placeholderClick()">
+		{{ selected == null ? placeholder : selected.nama }}
+		<i class="pi pi-chevron-down float-right mt-1"></i>
+	</div>
+
+	<ul *ngIf="selectState === 'focus'">
+		<li *ngIf="filter" (click)="placeholderClick()" id="filter">
+			<div class="input-group">
+				<input type="text" name="filter" id="filter" value="" class="form-control" placeholder="Search.." (keydown.tab)="searchEv($event)" (keyup.enter)="searchEv($event)" autocomplete="off">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button" (click)="btnSearchEv($event)"><i class="fa fa-search"></i></button>
+				</div>
+			</div>
+		</li>
+		<li *ngFor="let item of options" (click)="onClickEv($event)" [value]="item.ID" [ngClass]="{'active':selected?.ID == item.ID}">
+			<input *ngIf="isAbleReturnString" class="strID" type="hidden" name="valName" [value]="item.ID">
+			{{item.nama}}
+		</li>
+
+		<li (click)="placeholderClick()">
+		  <ul class="pagination pagination-sm ml-auto">
+		    <li class="page-item"><a class="page-link pointer-cursor" (click)="pagePrev()">Previous</a></li>
+		    <li class="page-item" *ngFor="let item of getArrayPage(totalRecords,rows); let i = index">
+		    	<a class="page-link pointer-cursor" [class.active]="pageQuery.page == (i+1)" (click)="pageLoad(i+1)">{{i+1}}</a>
+		    </li>
+		    <li class="page-item"><a class="page-link pointer-cursor" (click)="pageNext(totalRecords,rows)">Next</a></li>
+		  </ul>
+		</li>
+	</ul>
+</div>

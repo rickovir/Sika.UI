@@ -11,6 +11,7 @@ import { CreateComponent } from './create/create.component';
 
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { JenisService } from '../jenis/jenis.service';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { JenisService } from '../jenis/jenis.service';
     PemasukanComponent,
     ViewComponent,
     FormComponent,
-    CreateComponent
+    CreateComponent,
+    EditComponent
   ],
   imports: [
     CommonModule,

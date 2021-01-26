@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PemasukanService } from '../pemasukan.service';
+import { PengeluaranService } from '../pengeluaran.service';
 import { ActivatedRoute } from '@angular/router';
-import { PemasukanFormData } from '../pemasukan.model';
+import { PengeluaranFormData } from '../pengeluaran.model';
 import { BaseComponent } from '../../../core/base/base.component';
 
 @Component({
@@ -11,11 +11,11 @@ import { BaseComponent } from '../../../core/base/base.component';
   ]
 })
 export class ViewComponent extends BaseComponent implements OnInit {
-  dataPemasukan:PemasukanFormData = new PemasukanFormData();
+  dataPengeluaran:PengeluaranFormData = new PengeluaranFormData();
   errors:string[] = [];
 
-  constructor(private pemasukanService:PemasukanService, private activatedRoute:ActivatedRoute) {
-    super(pemasukanService);
+  constructor(private pengeluaranService:PengeluaranService, private activatedRoute:ActivatedRoute) {
+    super(pengeluaranService);
   }
 
   ngOnInit(): void {
@@ -26,11 +26,11 @@ export class ViewComponent extends BaseComponent implements OnInit {
 
   loadData(id:number)
   {
-    this.pemasukanService.getById(id).toPromise().then(
-      (data:PemasukanFormData)=>{
-        this.dataPemasukan = data;
+    this.pengeluaranService.getById(id).toPromise().then(
+      (data:PengeluaranFormData)=>{
+        this.dataPengeluaran = data;
 
-        this.pemasukanService.setData(this.dataPemasukan);
+        this.pengeluaranService.setData(this.dataPengeluaran);
       },
       (error)=>{
         this.errors = error;

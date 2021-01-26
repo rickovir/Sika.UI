@@ -7,8 +7,15 @@ import { environment } from '../../../environments/environment';
 export class PengeluaranService extends BaseAppService {
   serviceUri:string;
 
-  constructor(protected http:HttpClient) {
-    super(http);
+  constructor(protected httpService:HttpClient) {
+    super(httpService);
     this.serviceUri = `${environment.apiUrl}/pengeluaran`;
+  }
+
+  postImage(data) {
+    let formData = new FormData();
+    formData.append("image", data);
+
+    return this.httpService.post(`${this.serviceUri}/Upload`, formData, { headers: this.getMultiPartAuthHttpRequestHeader(),reportProgress:true,observe:'events' });
   }
 }

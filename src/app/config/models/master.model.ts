@@ -10,20 +10,9 @@ export interface IAppService{
 
 export interface ISimpleMasterData {
     ID: number;
-    name: string;
+    nama: string;
 }
   
-export class District implements ISimpleMasterData {
-ID: number;
-name: string;
-polygonCoordinate: string;
-
-constructor() {
-    this.ID = 0;;
-    this.name = "";
-    this.polygonCoordinate = "";
-}
-}
 
 export interface IOption {
     name: string;

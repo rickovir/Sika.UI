@@ -1,22 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JenisComponent } from './jenis.component';
-import { JenisService } from './jenis.service';
+import { FormComponent } from './form.component';
 
-describe('JenisComponent', () => {
-  let component: JenisComponent;
-  let fixture: ComponentFixture<JenisComponent>;
+describe('FormComponent', () => {
+  let component: FormComponent;
+  let fixture: ComponentFixture<FormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JenisComponent ],
-      providers:[JenisService]
+      declarations: [ FormComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JenisComponent);
+    fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

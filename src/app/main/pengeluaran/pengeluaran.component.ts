@@ -34,6 +34,7 @@ export class PengeluaranComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.pengeluaranService.setLoading(true);
   }
 
   getList()

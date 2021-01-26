@@ -1,22 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JenisComponent } from './jenis.component';
-import { JenisService } from './jenis.service';
+import { CashFlowComponent } from './cash-flow.component';
 
-describe('JenisComponent', () => {
-  let component: JenisComponent;
-  let fixture: ComponentFixture<JenisComponent>;
+describe('CashFlowComponent', () => {
+  let component: CashFlowComponent;
+  let fixture: ComponentFixture<CashFlowComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JenisComponent ],
-      providers:[JenisService]
+      declarations: [ CashFlowComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JenisComponent);
+    fixture = TestBed.createComponent(CashFlowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -33,4 +33,9 @@ export const navItems: INavData[] = [
     url: '/pengeluaran',
     icon: 'fa fa-shopping-cart'
   },
+  {
+    name: 'Arus Kas',
+    url: '/cash-flow',
+    icon: 'fa fa-handshake-o'
+  },
 ];

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../../core/base/base.component';
-import { PemasukanService } from '../pemasukan.service';
-import { PemasukanFormData } from '../pemasukan.model';
+import { PengeluaranService } from '../pengeluaran.service';
+import { PengeluaranFormData } from '../pengeluaran.model';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -10,12 +10,12 @@ import Swal from 'sweetalert2';
   templateUrl: './create.component.html',
 })
 export class CreateComponent extends BaseComponent implements OnInit {
-  dataPemasukan:PemasukanFormData = new PemasukanFormData();
+  dataPengeluaran:PengeluaranFormData = new PengeluaranFormData();
   errors:string[] = [];
 
-  constructor(private pemasukanService:PemasukanService, private router:Router) {
-    super(pemasukanService);
-    this.pemasukanService.setData(new PemasukanFormData());
+  constructor(private pengeluaranService:PengeluaranService, private router:Router) {
+    super(pengeluaranService);
+    this.pengeluaranService.setData(new PengeluaranFormData());
   }
 
   ngOnInit(): void {
@@ -23,15 +23,15 @@ export class CreateComponent extends BaseComponent implements OnInit {
 
   sendCreateData(event)
   {
-    this.pemasukanService.post(event).subscribe(
+    this.pengeluaranService.post(event).subscribe(
       ()=>{
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: 'Berhasil menambahkan Pemasukan'
+          text: 'Berhasil menambahkan Pengeluaran'
         })
-        this.pemasukanService.setLoading(false);
-        this.router.navigate(['/pemasukan']);
+        this.pengeluaranService.setLoading(false);
+        this.router.navigate(['/pengeluaran']);
       },
       (error)=>{
         this.errors = error;
